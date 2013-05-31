@@ -1,7 +1,7 @@
 module.exports = function(){
 	var routes = {}
 	routes.index = function(req, res){
-		res.send("hello word");
+		res.render("index.html");
 	}
 	return routes;
 }
