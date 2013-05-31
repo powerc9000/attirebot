@@ -17,6 +17,6 @@ app.configure(function(){
   app.use(express.session({store: new RedisStore()}));
   app.use(flash());
 });
-
+//test
 router.call(app);
 app.listen(config.port);
