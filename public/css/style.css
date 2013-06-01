@@ -16,6 +16,7 @@
    -webkit-transform:scale(1.2);
     box-shadow:1px 1px 1px rgba(50, 50, 50, .7);
     border-radius:3px;
+    cursor:pointer;
 }
 #loading{
     background:black;

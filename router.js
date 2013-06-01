@@ -1,5 +1,6 @@
-
+var routes = require("./routes");
 module.exports = function(){
-	var routes = require("./routes").call(this);
+	routes = routes.call(this);
 	this.get("/", routes.index);
+	this.post("/auth", routes.auth);
 }
