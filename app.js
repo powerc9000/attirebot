@@ -5,7 +5,7 @@ var MemStore = express.session.MemoryStore;
 var router = require("./router");
 var flash = require('connect-flash');
 var config = require("./config")
-
+var bcrypt = require("bcrypt");
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
@@ -20,5 +20,6 @@ app.configure(function(){
   app.use(flash());
 });
 //test
+
 router.call(app);
 app.listen(config.port);
