@@ -1,85 +1,20 @@
 <!doctype html>
-<html>
+<html ng-app="attirebot">
 	<head>
 		<title>Attire Bot</title>
 		
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="/css/style.css">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.1/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
+		<script src="/js/routes.js"></script>
+		<script src="/js/main.js"></script>
 		<script src="http://lokeshdhakar.com/projects/color-thief/js/libs/quantize.js"></script>
 		<script src="http://lokeshdhakar.com/projects/color-thief/js/color-thief.js"></script>
+		<script src="/js/dominantColor.js"></script>
 
 	</head>
 	<body>
-		<div class="container-fluid">
-			<div class="row-fluid">
-				<div class="hero-unit">
-					<h1>Attire Bot</h1>
-					<p>The robot that knows fashion!</p>
-					<p>
-						<a href="#" class="btn btn-primary">Check it out</a>
-					</p>
-					<form action="/auth" method="post">
-						<input type="text" name="username">
-						<input type="password" name="password">
-						<button type="submit" class="btn btn-success">Login</button>
-					</form>
-				</div>
-				<div>
-					<label>Image File:</label><br/>
-					<input type="file" id="imageLoader" name="imageLoader"/>
-					<canvas id="imageCanvas"></canvas>
-					<div class="pallet">
-					  
-					</div>
-					<div id="loading">Loading</div>
-				</div>
-			</div>
-		</div>
-		<script>
-			var imageLoader = document.getElementById('imageLoader');
-			    imageLoader.addEventListener('change', handleImage, false);
-			var canvas = document.getElementById('imageCanvas');
-			var ctx = canvas.getContext('2d');
-			var maxWidth = 500;
-			var maxHeight = 500
-			    
-
-			function handleImage(e){
-			    var reader = new FileReader();
-			    reader.onload = function(event){
-			        var img = new Image();
-			        img.onload = function(){
-			            
-			            var rgb;
-			            var dominate;
-			            var pallet;
-			            canvas.width = 500;
-			            canvas.height = img.height * ( 500/ img.width)
-			            ctx.drawImage(img,0,0, 500, img.height * ( 500/ img.width));
-			            $("#loading").show();
-			            setTimeout(function(){
-			                $("#loading").hide();
-			                dominate = getDominantColor(img)
-			            pallet = createPalette(img, 20)
-			            rgb = "rgb("+ dominate[0]+"," +  dominate[1]+"," +  dominate[2]+")";
-			            document.body.style.background = rgb;
-			            $(".pallet").children().remove();
-			                $("<div>").appendTo(".pallet").css("background", rgb);
-			            $.each(pallet, function(idx, el){
-			                $("<div>").appendTo(".pallet").css("background", "rgb("+ el[0]+"," + el[1]+"," +  el[2]+")");
-			            })
-			            },0)
-			            
-			        }
-			        img.src = event.target.result;
-			    }
-			    reader.readAsDataURL(e.target.files[0]);     
-			}
-			$(".pallet").off("click", "div").on("click", "div",function(){
-			    console.log(this.style.background)
-			    document.body.style.background = this.style.background;
-			})
-		</script>
+		<ng-view></ng-view>
 	</body>
 </html>

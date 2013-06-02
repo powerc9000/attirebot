@@ -16,7 +16,6 @@ module.exports = (function(){
 		db.open(function(err, db){
 			collection = db.collection("users")
 			collection.findOne({$or:[{username:username}, {email:username}]}, function(err, docs){
-				console.log(err, docs)
 				if(docs){
 					compare(password, docs.password).then(function(auth){
 						if(auth){
@@ -32,8 +31,8 @@ module.exports = (function(){
 					deferred.reject();
 				}
 				db.close();
-			})
-		})
+			});
+		});
 		return deferred.promise;
 	}
 	return database;
